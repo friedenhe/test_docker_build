@@ -1,6 +1,6 @@
 name: Publish Docker image
 
-on: [push, pull_request]
+on: [push]
 
 env:
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Create the docker container and run the tests
+    - name: Build and push
       run: |
         echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u dafoam --password-stdin
-        docker build -t dafoam/opt-packages:testci .
-        docker push dafoam/opt-packages:testci
+        docker build -t dafoam/opt-packages:latest .
+        docker push dafoam/opt-packages:latest
