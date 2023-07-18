@@ -3,12 +3,10 @@ FROM dafoam/opt-packages:latest
 # Swith to dafoamuser
 USER dafoamuser
 
-# Here, we need to load all the variables defined in loadDAFoam.sh
-RUN . /home/dafoamuser/dafoam/loadDAFoam.sh; exit 0
-
-# Update the DAFoam repo to the latest. We need to compile both the original
-# and AD versions of DAFoam libs
-RUN cd $DAFOAM_ROOT_PATH/repos && \
+# compile
+RUN sed -i 's/source/./g' /home/dafoamuser/dafoam/loadDAFoam.sh && \
+    . /home/dafoamuser/dafoam/loadDAFoam.sh && \
+    cd $DAFOAM_ROOT_PATH/repos && \
     git clone https://github.com/mdolab/dafoam && \
     cd dafoam && \
     . $DAFOAM_ROOT_PATH/OpenFOAM/OpenFOAM-v1812/etc/bashrc && \
