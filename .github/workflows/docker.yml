@@ -15,4 +15,4 @@ jobs:
       run: |
         echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u dafoam --password-stdin
         docker build -t dafoam/opt-packages:testci .
-        docker push
+        docker push dafoam/opt-packages:testci
