@@ -2,30 +2,17 @@ name: Publish Docker image
 
 on: [push, pull_request]
 
+env:
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
 jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the repo
-        uses: actions/checkout@v3
-      
-      - name: Log in to Docker Hub
-        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
-        with:
-          username: dafoam
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-        with:
-          images: dafoam/opt-packages
-      
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: latest
+    - uses: actions/checkout@v3
+    - name: Create the docker container and run the tests
+      run: |
+        echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u dafoam --password-stdin
+        docker build -t dafoam/opt-packages:testci .
+        docker push
