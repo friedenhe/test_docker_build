@@ -44,4 +44,5 @@ RUN cd $DAFOAM_ROOT_PATH/repos && \
     ./Allclean && \
     ./Allmake && \
     pip install . && \
-    rm -rf $DAFOAM_ROOT_PATH/repos/dafoam
+    rm -rf $DAFOAM_ROOT_PATH/repos/dafoam && \
+    rm -rf /home/dafoamuser/test_file_from_ci
