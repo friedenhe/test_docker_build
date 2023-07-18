@@ -6,7 +6,7 @@ USER dafoamuser
 # Here, we need to load all the variables defined in loadDAFoam.sh
 # DAFoam root path
 # DAFoam root path
-ENV DAFOAM_ROOT_PATH=$HOME/dafoam
+ENV DAFOAM_ROOT_PATH=/home/dafoamuser/dafoam
 # Miniconda3
 ENV PATH=$DAFOAM_ROOT_PATH/packages/miniconda3/bin:$PATH
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DAFOAM_ROOT_PATH/packages/miniconda3/lib
