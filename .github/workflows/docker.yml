@@ -14,5 +14,5 @@ jobs:
     - name: Build and push
       run: |
         echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u dafoam --password-stdin
-        docker build -t dafoam/opt-packages:latest .
+        docker build -t dafoam/opt-packages:latest -f .Dockerfile
         docker push dafoam/opt-packages:latest
